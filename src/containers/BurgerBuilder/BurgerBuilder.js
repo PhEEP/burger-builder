@@ -123,9 +123,11 @@ class BurgerBuilder extends Component {
       disabledInfo[key] = disabledInfo[key] <= 0
     }
     let orderSummary = null;
-    
-   
     let burger = <Spinner />;
+    if ( this.state.loading ) {
+      orderSummary = <Spinner />;
+    }
+
     if (this.state.ingredients) {
       burger = (
         <Ox>
@@ -145,9 +147,6 @@ class BurgerBuilder extends Component {
         purchaseContinued={this.purchaseContinueHandler}
         price={this.state.totalPrice}
         />;
-    }
-    if ( this.state.loading ) {
-      orderSummary = <Spinner />;
     }
 
     return (
