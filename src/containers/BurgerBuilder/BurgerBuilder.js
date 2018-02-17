@@ -34,6 +34,9 @@ class BurgerBuilder extends Component {
       .then(response => {
         this.setState({ ingredients: response.data });
       })
+      .catch(error => {
+
+      })
   }
 
   updatePurchaseState (ingredients) {
@@ -122,11 +125,9 @@ class BurgerBuilder extends Component {
     for (let key in disabledInfo) {
       disabledInfo[key] = disabledInfo[key] <= 0
     }
+
     let orderSummary = null;
     let burger = <Spinner />;
-    if ( this.state.loading ) {
-      orderSummary = <Spinner />;
-    }
 
     if (this.state.ingredients) {
       burger = (
@@ -147,6 +148,10 @@ class BurgerBuilder extends Component {
         purchaseContinued={this.purchaseContinueHandler}
         price={this.state.totalPrice}
         />;
+    }
+
+    if ( this.state.loading ) {
+      orderSummary = <Spinner />;
     }
 
     return (
