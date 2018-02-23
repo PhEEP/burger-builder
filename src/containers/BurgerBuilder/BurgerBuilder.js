@@ -9,14 +9,14 @@ import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import axios from '../../axios-orders';
-import * as actionTypes from '../../store/actions';
+import * as burgerBuilderActions from '../../store/actions/index';
 
 class BurgerBuilder extends Component {
   // constructor(props) {
   //   super(props);
   //   this.state = {...}
   // }
-  
+
   state = {
     purchasing: false,
     loading: false,
@@ -75,17 +75,17 @@ class BurgerBuilder extends Component {
       burger = (
         <Ox>
           <Burger ingredients={this.props.ings} />
-          <BuildControls 
-              ingredientAdded={this.props.onIngredientAdded} 
-              ingredientRemoved={this.props.onIngredientRemoved} 
-              disabled={disabledInfo} 
-              price={this.props.price} 
-              purchaseable={this.updatePurchaseState(this.props.ings)} 
+          <BuildControls
+              ingredientAdded={this.props.onIngredientAdded}
+              ingredientRemoved={this.props.onIngredientRemoved}
+              disabled={disabledInfo}
+              price={this.props.price}
+              purchaseable={this.updatePurchaseState(this.props.ings)}
               ordered={this.purchaseHandler}/>
         </Ox>
       );
-      orderSummary = <OrderSummary 
-        ingredients={this.props.ings} 
+      orderSummary = <OrderSummary
+        ingredients={this.props.ings}
         purchaseCancelled={this.purchaseCancelHandler}
         purchaseContinued={this.purchaseContinueHandler}
         price={this.props.price}
@@ -99,7 +99,7 @@ class BurgerBuilder extends Component {
     return (
       <Ox>
         <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
-          {orderSummary}          
+          {orderSummary}
         </Modal>
         {burger}
       </Ox>
@@ -115,8 +115,8 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    onIngredientAdded: (ingName) => dispatch({type: actionTypes.ADD_INGREDIENT, ingredientName: ingName}),
-    onIngredientRemoved: (ingName) => dispatch({type: actionTypes.REMOVE_INGREDIENT, ingredientName: ingName})
+    onIngredientAdded: (ingName) => dispatch(burgerBuilderActions.addIngredient(ingName)),
+    onIngredientRemoved: (ingName) => dispatch(burgerBuilderActions.removeIngredient(ingName))
   }
 };
 
