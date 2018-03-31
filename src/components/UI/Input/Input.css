@@ -12,7 +12,7 @@
 
 .InputElement {
     outline: none;
-    border: 1px solide #ccc;
+    border: 1px solid #ccc;
     background-color: white;
     font: inherit;
     padding: 6px 10px;
@@ -28,5 +28,5 @@
 
 .Invalid {
     border: 1px solid red;
-    background-color: #fda49a;
+    background-color: #FDA49A;
 }
